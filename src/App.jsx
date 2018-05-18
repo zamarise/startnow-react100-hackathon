@@ -11,25 +11,45 @@ class App extends Component {
 
   componentDidMount() {
     axios.get('https://www.themealdb.com/api/json/v1/1/random.php').then(response => {
-      console.log('response', response);
-
       this.setState({ recipe: response.data.meals['0'] });
     });
   }
 
   render() {
-    const randomRecipe = this.state.recipe || [];
-    console.log('randomRecipe', randomRecipe);
+    const { recipe } = this.state;
+
+    const removeEmpty = obj => {
+      Object.keys(obj).forEach(k => !obj[k] && obj[k] !== undefined && delete obj[k]);
+      Object.keys(obj).forEach(k => obj[k] && obj[k] === obj.idMeal && delete obj[k]);
+      Object.keys(obj).forEach(k => obj[k] && obj[k] === obj.strCategory && delete obj[k]);
+      Object.keys(obj).forEach(k => obj[k] && obj[k] === obj.strArea && delete obj[k]);
+      Object.keys(obj).forEach(k => obj[k] && obj[k] === obj.strTags && delete obj[k]);
+      return obj;
+    };
+
+    const newRecipeArray = removeEmpty(recipe);
 
     return (
       <div className='container-fluid'>
         <div className='row'>
           <div className='.col-xs-12 .col-md-8'>
             <h1 className='text-center'>What Should I Make Today?</h1>
-            <h2 className='lead text-muted text-center'>A hackathon project (made in React)</h2>
+            <h2 className='lead text-muted text-center'>
+              A hackathon project (made in React). Refresh the page for a new recipe.
+            </h2>
             <hr />
+
+            {Object.keys(newRecipeArray).map((item, i) => (
+              <RandomMeal
+                name={ item
+                  .replace(/^str/, '')
+                  .replace(/^Ingredient/, 'Ingredient ')
+                  .replace(/^Measure/, 'Measure ') }
+                key={ i }
+                value={ newRecipeArray[item] }
+              />
+            ))}
           </div>
-          <RandomMeal currentRecipe={ randomRecipe } />
         </div>
       </div>
     );
