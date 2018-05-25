@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npm run less && webpack --watch",
-    "start": "node server/index.js",
+    "start": "npm run build && node server/index.js",
     "less": "lessc src/css/style.less dist/css/style.css",
     "dev": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
