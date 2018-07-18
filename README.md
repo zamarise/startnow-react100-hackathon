@@ -2,9 +2,9 @@
 
 > A hackathon project (made in React). Refresh the page for a new recipe.
 
-This was my twelfth project at Origin Code Academy. This app was made using React.
+This was my thirteenth project at Origin Code Academy. This app was made using React.
 
-![](what-should-i-make-today.png)
+![](what-should-i-make-mobile.png)
 
 ## Background
 
