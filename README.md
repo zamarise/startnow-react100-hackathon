@@ -4,7 +4,7 @@
 
 This was my twelfth project at Origin Code Academy. This app was made using React.
 
-![](what-should-i-make-today.png.png)
+![](what-should-i-make-today.png)
 
 ## Background
 
